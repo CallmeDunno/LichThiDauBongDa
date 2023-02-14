@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_white_conner_16">
+
+    <ImageView
+        android:id="@+id/img_dinosaur"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/dinosaur" />
+
+    <TextView
+        android:id="@+id/tv_oops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_dinosaur"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Oops!"
+        android:textColor="@color/black"
+        android:textSize="45sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_tb1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_oops"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Kết nối chậm hoặc không có mạng."
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_tb2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_tb1"
+        android:gravity="center"
+        android:text="Vui lòng kiểm tra kết nối của bạn và thử lại sau."
+        android:textSize="20sp"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:background="@drawable/bg_blue_conner_16"
+        android:id="@+id/btn_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_tb2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="OK"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+</RelativeLayout>
