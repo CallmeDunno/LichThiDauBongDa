@@ -2,6 +2,7 @@ package com.example.lichthidaubongda;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -103,8 +104,11 @@ public class WebActivity extends AppCompatActivity {
 
                     bundle.putString("TenGiaiDau", w_tenGiaiDau);
                     bundle.putString("MuaGiai", w_muaGiai);
-                    intent.putExtra("Data", bundle);
+                    Log.d("test", w_tenGiaiDau + " " + w_muaGiai);
+//                    Toast.makeText(WebActivity.this, w_tenGiaiDau + " " + w_muaGiai, Toast.LENGTH_SHORT).show();
+
                 }
+                intent.putExtra("Data", bundle);
                 startActivity(intent);
             }
         });
@@ -193,7 +197,7 @@ public class WebActivity extends AppCompatActivity {
         Elements elementsLichThiDau = document.getElementsByClass("list_match");
 
         try{
-            String gioThiDau, ten1, ten2, logo1, logo2, ngayThiDau = "", vongDau;
+            String gioThiDau, ten1, ten2, logo1, logo2, ngayThiDau = "", vongDau, more;
             for (int i = 0; i < elementsLichThiDau.size(); i++) {
                 vongDau = elementsVongDau.get(i).getElementsByTag("h2").first().text();
                 Elements listTag_li = elementsLichThiDau.get(i).getElementsByTag("li");
@@ -207,8 +211,9 @@ public class WebActivity extends AppCompatActivity {
                         logo1 = li.getElementsByTag("div").get(1).getElementsByTag("div").first().getElementsByTag("img").attr("data-src"); //5
                         ten2 = li.getElementsByTag("div").get(1).getElementsByTag("div").last().getElementsByTag("a").first().text(); //6
                         logo2 = li.getElementsByTag("div").get(1).getElementsByTag("div").last().getElementsByTag("img").attr("data-src"); //7
+                        more = li.getElementsByTag("div").get(2).getElementsByTag("a").first().attr("href");
                     }
-                    CheckExistedLTD(ten1, ten2, logo1, logo2, gioThiDau, ngayThiDau, vongDau);
+                    CheckExistedLTD(ten1, ten2, logo1, logo2, gioThiDau, ngayThiDau, vongDau, more);
                 }
             }
 
@@ -217,13 +222,13 @@ public class WebActivity extends AppCompatActivity {
         }
     }
 
-    private void CheckExistedLTD(String t1, String t2, String l1, String l2, String gio, String ngay, String vong){
+    private void CheckExistedLTD(String t1, String t2, String l1, String l2, String gio, String ngay, String vong, String more){
         RequestQueue requestQueue = Volley.newRequestQueue(WebActivity.this);
         StringRequest stringRequest =new StringRequest(Request.Method.POST, URL.urlCheckLTD.GetUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(response.trim().equals("isNotExisted")){
-                    GetMaGiaiDau(t1, t2, l1, l2, gio, ngay, vong);
+                    GetMaGiaiDau(t1, t2, l1, l2, gio, ngay, vong, more);
                 }
             }
         }, new Response.ErrorListener() {
@@ -246,7 +251,7 @@ public class WebActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void InsertDataLTD(String t1, String t2, String l1, String l2, String gio, String ngay, String vong, String magd) {
+    private void InsertDataLTD(String t1, String t2, String l1, String l2, String gio, String ngay, String vong, String more, String magd) {
         RequestQueue requestQueue = Volley.newRequestQueue(WebActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL.urlInsertLTD.GetUrl(), new Response.Listener<String>() {
             @Override
@@ -272,6 +277,7 @@ public class WebActivity extends AppCompatActivity {
                 map.put("gio_thi_dau", gio);
                 map.put("ngay_thi_dau", ngay);
                 map.put("vong_dau", vong);
+                map.put("more", more);
                 map.put("ma_giai_dau", magd);
                 return map;
             }
@@ -279,13 +285,13 @@ public class WebActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void GetMaGiaiDau(String t1, String t2, String l1, String l2, String gio, String ngay, String vong){
+    private void GetMaGiaiDau(String t1, String t2, String l1, String l2, String gio, String ngay, String vong, String more){
         RequestQueue requestQueue = Volley.newRequestQueue(WebActivity.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL.urlGetMaGiaiDau.GetUrl(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(!response.trim().equals("isNotExisted")){
-                    InsertDataLTD(t1, t2, l1, l2, gio, ngay, vong, response);
+                    InsertDataLTD(t1, t2, l1, l2, gio, ngay, vong, more, response);
                 }
             }
         }, new Response.ErrorListener() {

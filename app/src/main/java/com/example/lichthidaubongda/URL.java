@@ -1,15 +1,14 @@
 package com.example.lichthidaubongda;
 
 public enum URL {
-    //192.168.137.169  192.168.43.214
-    urlCheckGD      ("http://192.168.43.214:81/lichdabong/checkExistGD.php"),
-    urlGetDataGD    ("http://192.168.43.214:81/lichdabong/getDataGD.php"),
-    urlInsertGD     ("http://192.168.43.214:81/lichdabong/insertDataGD.php"),
-    urlCheckLTD     ("http://192.168.43.214:81/lichdabong/checkExistLTD.php"),
-    urlInsertLTD    ("http://192.168.43.214:81/lichdabong/insertDataLTD.php"),
-    urlGetDataLTD   ("http://192.168.43.214:81/lichdabong/getDataLTD.php"),
-    urlUpdateDataLTD("http://192.168.43.214:81/lichdabong/updateDataLTD.php"),
-    urlGetMaGiaiDau ("http://192.168.43.214:81/lichdabong/getMaGiaiDau.php");
+    urlCheckGD      ("https://callmedunno.000webhostapp.com/checkExistGD.php"),
+    urlGetDataGD    ("https://callmedunno.000webhostapp.com/getDataGD.php"),
+    urlInsertGD     ("https://callmedunno.000webhostapp.com/insertDataGD.php"),
+    urlCheckLTD     ("https://callmedunno.000webhostapp.com/checkExistLTD.php"),
+    urlInsertLTD    ("https://callmedunno.000webhostapp.com/insertDataLTD.php"),
+    urlGetDataLTD   ("https://callmedunno.000webhostapp.com/getDataLTD.php"),
+    urlUpdateDataLTD("https://callmedunno.000webhostapp.com/updateDataLTD.php"),
+    urlGetMaGiaiDau ("https://callmedunno.000webhostapp.com/getMaGiaiDau.php");
 
     private final String Link;
 

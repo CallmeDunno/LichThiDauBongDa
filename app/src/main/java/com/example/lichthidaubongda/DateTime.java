@@ -57,18 +57,14 @@ class DateTime implements Comparable<DateTime> {
     private static boolean isValidDate(int d, int m, int y) {
         if (m < 1 || m > 12)      return false;
         if (d < 1 || d > DAYS[m]) return false;
-        if (m == 2 && d == 29 && !isLeapYear(y)) return false;
-        return true;
+        return m != 2 || d != 29 || isLeapYear(y);
     }
 
     private static boolean isValidTime(int h, int m) {
         if (h < 0 || h > 24){
             return false;
         }
-        if (m < 0 || m > 59){
-            return false;
-        }
-        return true;
+        return m >= 0 && m <= 59;
     }
 
     // is y a leap year?

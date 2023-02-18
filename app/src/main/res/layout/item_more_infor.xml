@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_white_conner_16">
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_blue_dark_conner_top_r_l_16"
+        android:gravity="center"
+        android:text="Thông tin trận đấu"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_weight="6"
+        android:id="@+id/fr"
+        android:layout_below="@id/tv_label">
+
+        <WebView
+            android:id="@+id/wv_more"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
+
+    </FrameLayout>
+
+</RelativeLayout>

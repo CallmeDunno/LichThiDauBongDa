@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class DownloadThread extends Thread{
 
-    private String url;
+    private final String url;
     private Document document;
 
     public DownloadThread(String url) {

@@ -10,13 +10,16 @@ public class LichThiDau {
     private DateTime dateTime;
     private String round;
 
-    public LichThiDau(String team_1, String logo_1, String team_2, String logo_2, String time, String date, String round) {
+    private String more;
+
+    public LichThiDau(String team_1, String logo_1, String team_2, String logo_2, String time, String date, String round, String more) {
         this.team_1 = team_1;
         this.logo_1 = logo_1;
         this.team_2 = team_2;
         this.logo_2 = logo_2;
         this.dateTime = new DateTime(date, time);
         this.round = round;
+        this.more = more;
     }
 
     public DateTime getDateTime() {
@@ -65,6 +68,14 @@ public class LichThiDau {
 
     public void setRound(String round) {
         this.round = round;
+    }
+
+    public String getMore() {
+        return more;
+    }
+
+    public void setMore(String more) {
+        this.more = more;
     }
 
     public static class DateOrder implements Comparator<LichThiDau> {
