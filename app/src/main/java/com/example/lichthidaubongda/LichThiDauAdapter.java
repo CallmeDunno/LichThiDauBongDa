@@ -34,7 +34,7 @@ public class LichThiDauAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return danhSachTD.get(i);
     }
 
     @Override
