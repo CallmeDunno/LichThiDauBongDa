@@ -1,7 +1,6 @@
 package com.example.lichthidaubongda;
 
 import android.app.Dialog;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,16 +27,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,10 +44,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     //region Variable
     ListView listView;
@@ -60,14 +54,14 @@ public class MainActivity extends AppCompatActivity{
     FloatingActionButton fabtn;
     Spinner spinnerDoiBong;
 
-
+    private final String querySelectedData = "SELECT ten_doi_1, logo_1, ten_doi_2, logo_2, gio, ngay, vong, more FROM LichThiDau";
 
     private String f_tenGiaiDau;
     private String f_muaGiai;
 
-    DB_SQLite dbSqLite;
+    public static DB_SQLite dbSqLite;
 
-    ArrayList<LichThiDau> danhSachTranDau = new ArrayList<>();
+    public static ArrayList<LichThiDau> danhSachTranDau = new ArrayList<>();
     LichThiDauAdapter lichThiDauAdapter = new LichThiDauAdapter(this, R.layout.list_item, danhSachTranDau);
 
     ArrayList<String> danhSachDoiBong = new ArrayList<>();
@@ -116,25 +110,25 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void SelectedDataFromSQLite(){
-        Cursor cursor = dbSqLite.GetData("SELECT * FROM LichThiDau");
+    private void SelectedDataFromSQLite() {
+        Cursor cursor = dbSqLite.GetData(querySelectedData);
         danhSachTranDau.clear();
         danhSachDoiBong.clear();
         danhSachDoiBong.add("Mặc định");
-        while (cursor.moveToNext()){
-            String t1 = cursor.getString(1);
-            String l1 = cursor.getString(2);
-            String t2 = cursor.getString(3);
-            String l2 = cursor.getString(4);
-            String gio = cursor.getString(5);
-            String ngay = cursor.getString(6);
-            String vong = cursor.getString(7);
-            String more = cursor.getString(8);
+        while (cursor.moveToNext()) {
+            String t1 = cursor.getString(0);
+            String l1 = cursor.getString(1);
+            String t2 = cursor.getString(2);
+            String l2 = cursor.getString(3);
+            String gio = cursor.getString(4);
+            String ngay = cursor.getString(5);
+            String vong = cursor.getString(6);
+            String more = cursor.getString(7);
             danhSachTranDau.add(new LichThiDau(t1, l1, t2, l2, gio, ngay, vong, more));
-            if (!danhSachDoiBong.contains(t1)){
+            if (!danhSachDoiBong.contains(t1)) {
                 danhSachDoiBong.add(t1);
             }
-            if (!danhSachDoiBong.contains(t2)){
+            if (!danhSachDoiBong.contains(t2)) {
                 danhSachDoiBong.add(t2);
             }
         }
@@ -143,19 +137,19 @@ public class MainActivity extends AppCompatActivity{
         spinnerAdapter.notifyDataSetChanged();
     }
 
-    private void SelectedDataFromSQLite(String str){
-        Cursor cursor = dbSqLite.GetData("SELECT * FROM LichThiDau");
+    private void SelectedDataFromSQLite(String str) {
+        Cursor cursor = dbSqLite.GetData(querySelectedData);
         danhSachTranDau.clear();
-        while (cursor.moveToNext()){
-            String t1 = cursor.getString(1);
-            String t2 = cursor.getString(3);
-            if (t1.equals(str) || t2.equals(str)){
-                String l1 = cursor.getString(2);
-                String l2 = cursor.getString(4);
-                String gio = cursor.getString(5);
-                String ngay = cursor.getString(6);
-                String vong = cursor.getString(7);
-                String more = cursor.getString(8);
+        while (cursor.moveToNext()) {
+            String t1 = cursor.getString(0);
+            String t2 = cursor.getString(2);
+            if (t1.equals(str) || t2.equals(str)) {
+                String l1 = cursor.getString(1);
+                String l2 = cursor.getString(3);
+                String gio = cursor.getString(4);
+                String ngay = cursor.getString(5);
+                String vong = cursor.getString(6);
+                String more = cursor.getString(7);
                 danhSachTranDau.add(new LichThiDau(t1, l1, t2, l2, gio, ngay, vong, more));
             }
         }
@@ -163,13 +157,13 @@ public class MainActivity extends AppCompatActivity{
         lichThiDauAdapter.notifyDataSetChanged();
     }
 
-    private void InsertDataIntoSQLite(String t1, String l1, String t2, String l2, String gio, String ngay, String vong, String more){
+    private void InsertDataIntoSQLite(String t1, String l1, String t2, String l2, String gio, String ngay, String vong, String more) {
         String queryInsert = String.format("INSERT INTO LichThiDau VALUES (NULL, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
                 t1, l1, t2, l2, gio, ngay, vong, more);
         dbSqLite.QueryData(queryInsert);
     }
 
-    private void DeleteDataFromTable(){
+    private void DeleteDataFromTable() {
         String queryDeleteDataSQLite = "DELETE FROM LichThiDau";
         dbSqLite.QueryData(queryDeleteDataSQLite);
     }
@@ -201,22 +195,21 @@ public class MainActivity extends AppCompatActivity{
                 String m = bundle.getString("MuaGiai");
                 GetDataGD(t, m);
                 GetDataLTD(t, m);
+
             } else {
                 GetDataGD(f_tenGiaiDau, f_muaGiai);
                 SelectedDataFromSQLite();
+                GoToService(f_tenGiaiDau, f_muaGiai);
             }
-
         } else {
             Toast.makeText(this, "intent null 150", Toast.LENGTH_SHORT).show();
         }
 
-        Log.d("test", "size = " + danhSachTranDau.size());
-        Log.d("test", "sizeDB = " + danhSachDoiBong.size());
 
         spinnerDoiBong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (danhSachDoiBong.get(i).equals("Mặc định")){
+                if (danhSachDoiBong.get(i).equals("Mặc định")) {
                     Log.d("test", "huhu");
                     SelectedDataFromSQLite();
                 } else {
@@ -247,7 +240,41 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    private void DialogMore(int i){
+    private ArrayList<LichThiDau> GetList() {
+        String querySelect = "SELECT * FROM LichThiDau";
+        Cursor cursor = MainActivity.dbSqLite.GetData(querySelect);
+        ArrayList<LichThiDau> list = new ArrayList<>();
+        while(cursor.moveToNext()){
+            String id = cursor.getString(0);
+            String t1 = cursor.getString(1);
+            String l1 = cursor.getString(2);
+            String t2 = cursor.getString(3);
+            String l2 = cursor.getString(4);
+            String gio = cursor.getString(5);
+            String ngay = cursor.getString(6);
+            String vong = cursor.getString(7);
+            String more = cursor.getString(8);
+            list.add(new LichThiDau(id, t1, l1, t2, l2, gio, ngay, vong, more));
+        }
+        Collections.sort(list, new LichThiDau.DateOrder());
+        Toast.makeText(this, "x: " + list.size(), Toast.LENGTH_SHORT).show();
+        return list;
+    }
+
+    private void GoToService(String t1, String t2){
+        Toast.makeText(this, "DSTD2: " + danhSachTranDau.size(), Toast.LENGTH_SHORT).show();
+        Intent intentService = new Intent(MainActivity.this, ServicePushNoti.class);
+        intentService.putExtra("tenGD", t1);
+        intentService.putExtra("mg", t2);
+        startService(intentService);
+    }
+
+    private void StopService(){
+        Intent intentService = new Intent(MainActivity.this, ServicePushNoti.class);
+        stopService(intentService);
+    }
+
+    private void DialogMore(int i) {
         Dialog dialog = new Dialog(MainActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.item_more_infor);
@@ -335,6 +362,8 @@ public class MainActivity extends AppCompatActivity{
                                 e.printStackTrace();
                             }
                         }
+                        StopService();
+                        GoToService(ten, mua);
                         SelectedDataFromSQLite();
                     }
                 }, new Response.ErrorListener() {
@@ -344,37 +373,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         requestQueue.add(jsonArrayRequest);
-    }
-
-    private void UpdateDataLTD(String t1, String t2) {
-        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL.urlUpdateDataLTD.GetUrl(), new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (response.trim().equals("updateSucces")) {
-                    Log.d("test", "update success line 396 Main");
-                } else {
-                    Log.d("test", "update fail line 398 Main");
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("Error", "Error update line 404 main " + error.toString());
-            }
-        }) {
-            @NonNull
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("ten_doi_bong_1", t1);
-                map.put("ten_doi_bong_2", t2);
-                map.put("ten_giai_dau", f_tenGiaiDau);
-                map.put("mua_giai", f_muaGiai);
-                return map;
-            }
-        };
-        requestQueue.add(stringRequest);
     }
 
 }
