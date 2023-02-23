@@ -60,20 +60,21 @@ public class ServicePushNoti extends Service {
         tenGD       = intent.getStringExtra("tenGD");
         muagiai     = intent.getStringExtra("mg");
         ArrayList<LichThiDau> x = GetList();
-        LichThiDau lichThiDau = x.get(0);
+        if (x.size() != 0){
+            LichThiDau lichThiDau = x.get(0);
 
-        Calendar now = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        String datetimeCurr = simpleDateFormat.format(now.getTime());
+            Calendar now = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            String datetimeCurr = simpleDateFormat.format(now.getTime());
 
-        if (datetimeCurr.compareTo(lichThiDau.getDateTime().toString()) > 0){
-            x.remove(lichThiDau);
-            UpdateDataLTD(lichThiDau.getTeam_1(), lichThiDau.getTeam_2());
-            DeleteData(lichThiDau.getTeam_1(), lichThiDau.getTeam_2(), lichThiDau.getRound());
-            stopForeground(true);
+            if (datetimeCurr.compareTo(lichThiDau.getDateTime().toString()) > 0){
+                x.remove(lichThiDau);
+                UpdateDataLTD(lichThiDau.getTeam_1(), lichThiDau.getTeam_2());
+                DeleteData(lichThiDau.getTeam_1(), lichThiDau.getTeam_2(), lichThiDau.getRound());
+                stopForeground(true);
+            }
+            startForeground(1, sendNotification(lichThiDau.getTeam_1(), lichThiDau.getTeam_2(), lichThiDau.getDateTime().toString()));
         }
-
-        startForeground(1, sendNotification(lichThiDau.getTeam_1(), lichThiDau.getTeam_2(), lichThiDau.getDateTime().toString()));
         return START_NOT_STICKY;
     }
 
@@ -118,7 +119,6 @@ public class ServicePushNoti extends Service {
             list.add(new LichThiDau(id, t1, l1, t2, l2, gio, ngay, vong, more));
         }
         Collections.sort(list, new LichThiDau.DateOrder());
-        Toast.makeText(this, "x: " + list.size(), Toast.LENGTH_SHORT).show();
         return list;
     }
 

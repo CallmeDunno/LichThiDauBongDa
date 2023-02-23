@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 String m = bundle.getString("MuaGiai");
                 GetDataGD(t, m);
                 GetDataLTD(t, m);
-
+                Log.d("test", "line 198");
             } else {
                 GetDataGD(f_tenGiaiDau, f_muaGiai);
                 SelectedDataFromSQLite();
@@ -205,12 +205,11 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "intent null 150", Toast.LENGTH_SHORT).show();
         }
 
-
         spinnerDoiBong.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (danhSachDoiBong.get(i).equals("Mặc định")) {
-                    Log.d("test", "huhu");
+                    Log.d("test", "line 212");
                     SelectedDataFromSQLite();
                 } else {
                     Toast.makeText(MainActivity.this, danhSachDoiBong.get(i), Toast.LENGTH_SHORT).show();
@@ -240,29 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<LichThiDau> GetList() {
-        String querySelect = "SELECT * FROM LichThiDau";
-        Cursor cursor = MainActivity.dbSqLite.GetData(querySelect);
-        ArrayList<LichThiDau> list = new ArrayList<>();
-        while(cursor.moveToNext()){
-            String id = cursor.getString(0);
-            String t1 = cursor.getString(1);
-            String l1 = cursor.getString(2);
-            String t2 = cursor.getString(3);
-            String l2 = cursor.getString(4);
-            String gio = cursor.getString(5);
-            String ngay = cursor.getString(6);
-            String vong = cursor.getString(7);
-            String more = cursor.getString(8);
-            list.add(new LichThiDau(id, t1, l1, t2, l2, gio, ngay, vong, more));
-        }
-        Collections.sort(list, new LichThiDau.DateOrder());
-        Toast.makeText(this, "x: " + list.size(), Toast.LENGTH_SHORT).show();
-        return list;
-    }
-
     private void GoToService(String t1, String t2){
-        Toast.makeText(this, "DSTD2: " + danhSachTranDau.size(), Toast.LENGTH_SHORT).show();
         Intent intentService = new Intent(MainActivity.this, ServicePushNoti.class);
         intentService.putExtra("tenGD", t1);
         intentService.putExtra("mg", t2);
@@ -329,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("test", "line 196 " + error.toString());
+                Log.e("test", "line 309 " + error.toString());
             }
         });
         requestQueue.add(jsonArrayRequest);
@@ -369,7 +346,7 @@ public class MainActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("test", "line 242 " + error.toString());
+                Log.e("test", "line 349 " + error.toString());
             }
         });
         requestQueue.add(jsonArrayRequest);

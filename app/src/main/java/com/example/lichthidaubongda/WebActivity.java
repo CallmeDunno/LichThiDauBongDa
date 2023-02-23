@@ -2,7 +2,6 @@ package com.example.lichthidaubongda;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,7 +16,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -88,11 +86,10 @@ public class WebActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 String urlHTML = webView.getUrl();
                 if (urlHTML.isEmpty()){
-                    Log.d("test", "urlHTML is null (WebActivity line 90");
+                    Log.d("test", "urlHTML is null (WebActivity line 89");
                 } else {
                     DownloadThread thread = new DownloadThread(urlHTML);
                     thread.start();
-
                     try {
                         thread.join();
                     } catch (InterruptedException e) {
@@ -104,9 +101,12 @@ public class WebActivity extends AppCompatActivity {
 
                     bundle.putString("TenGiaiDau", w_tenGiaiDau);
                     bundle.putString("MuaGiai", w_muaGiai);
-                    Log.d("test", w_tenGiaiDau + " " + w_muaGiai);
-//                    Toast.makeText(WebActivity.this, w_tenGiaiDau + " " + w_muaGiai, Toast.LENGTH_SHORT).show();
-
+                    Log.d("test", w_tenGiaiDau + " line 104 " + w_muaGiai);
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
                 intent.putExtra("Data", bundle);
                 startActivity(intent);
@@ -122,6 +122,8 @@ public class WebActivity extends AppCompatActivity {
         w_tenGiaiDau    = element.getElementsByTag("li").get(0).getElementsByTag("div").text();
         w_khuVuc        = element.getElementsByTag("li").get(1).getElementsByTag("div").get(1).text();
         w_muaGiai       = element.getElementsByTag("li").get(2).getElementsByTag("div").get(1).text();
+
+        Log.d("test", "web 126: " + w_tenGiaiDau);
 
         SharedPreferences.Editor editor = MainActivity.sharedPreferences.edit();
         editor.remove("tenGiaiDau");
@@ -257,7 +259,7 @@ public class WebActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (response.trim().equals("insertSucces")){
-                    Log.d("test", "Insert LTD line 260");
+                    Log.d("test", "Insert LTD line 262");
                 }
             }
         }, new Response.ErrorListener() {
@@ -297,7 +299,7 @@ public class WebActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Error", "Error Get MAGD 305" + error.toString());
+                Log.e("Error", "Error Get MAGD 302" + error.toString());
             }
         }){
             @NonNull
