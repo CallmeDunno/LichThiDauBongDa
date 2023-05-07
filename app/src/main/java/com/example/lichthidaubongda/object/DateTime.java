@@ -1,4 +1,4 @@
-package com.example.lichthidaubongda;
+package com.example.lichthidaubongda.object;
 
 import androidx.annotation.NonNull;
 
