@@ -1,14 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.home.HomeFragment">
+    android:background="#EBE8E8"
+    tools:context=".fragment.home.view.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:contentDescription="@string/TitleHomeFragment"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/background_top"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="300dp"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="96dp"
+                    android:background="#70000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_league_logo"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:background="@drawable/bg_white_conner_16"
+                    android:contentDescription="@string/LeagueLogo"
+                    android:src="@drawable/ball"
+                    app:layout_constraintBottom_toTopOf="@+id/view"
+                    app:layout_constraintEnd_toEndOf="@+id/view"
+                    app:layout_constraintStart_toStartOf="@+id/view"
+                    app:layout_constraintTop_toTopOf="@+id/view" />
+
+                <TextView
+                    android:id="@+id/tv_league_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/LeagueName"
+                    android:textColor="#ffffff"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/img_league_logo"
+                    app:layout_constraintStart_toStartOf="@+id/img_league_logo"
+                    app:layout_constraintTop_toBottomOf="@+id/img_league_logo" />
+
+                <TextView
+                    android:id="@+id/tv_league_season"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/LeagueSeason"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_league_name"
+                    app:layout_constraintStart_toStartOf="@+id/tv_league_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_league_name" />
+
+                <TextView
+                    android:id="@+id/tv_league_season_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/LeagueSeasonStart"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_league_season"
+                    app:layout_constraintStart_toStartOf="@+id/tv_league_season"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_league_season" />
+
+                <TextView
+                    android:id="@+id/tv_league_season_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/LeagueSeasonEnd"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_league_season_start"
+                    app:layout_constraintStart_toStartOf="@+id/tv_league_season_start"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_league_season_start" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:background="@drawable/bg_white_conner_16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/btn_schedule"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/bg_green_conner_16"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:contentDescription="@string/Schedule"
+                            android:src="@drawable/ic_calendar_50" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/Schedule"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_chart"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/bg_orange_conner_16"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:contentDescription="@string/Chart"
+                            android:src="@drawable/ic_chart_50" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/Chart"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/btn_about"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/bg_red_conner_16"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:contentDescription="@string/About"
+                            android:src="@drawable/ic_info_50" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/About"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_contact"
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/bg_yellow_conner_16"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:contentDescription="@string/Contact"
+                            android:src="@drawable/ic_contact_50" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/Contact"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

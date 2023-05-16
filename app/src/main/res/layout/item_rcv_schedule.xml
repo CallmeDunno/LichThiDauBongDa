@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="16dp"
+    app:cardCornerRadius="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp">
+
+        <ImageView
+            android:id="@+id/img_team_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_margin="8dp"
+            android:contentDescription="@string/LeagueLogo"
+            android:src="@drawable/ball"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/img_team_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="@string/LeagueLogo"
+            android:src="@drawable/ball"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_toStartOf="@id/img_team_2"
+            android:layout_toEndOf="@id/img_team_1"
+            android:gravity="center"
+            android:text="@string/Time"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/img_team_1"
+            app:layout_constraintEnd_toStartOf="@+id/img_team_2"
+            app:layout_constraintHorizontal_bias="0.351"
+            app:layout_constraintStart_toEndOf="@+id/img_team_1"
+            app:layout_constraintTop_toTopOf="@+id/img_team_1" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_toStartOf="@id/img_team_2"
+            android:layout_toEndOf="@id/img_team_1"
+            android:gravity="center"
+            android:text="@string/Date"
+            android:textColor="#262E63"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/tv_time"
+            app:layout_constraintStart_toStartOf="@+id/tv_time"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time" />
+
+        <TextView
+            android:id="@+id/tv_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_date"
+            android:layout_marginTop="8dp"
+            android:layout_toStartOf="@id/img_team_2"
+            android:layout_toEndOf="@id/img_team_1"
+            android:gravity="center"
+            android:text="@string/Round"
+            android:textColor="#262E63"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/tv_date"
+            app:layout_constraintStart_toStartOf="@+id/tv_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+
+        <TextView
+            android:id="@+id/tv_team1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_team_1"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/HomeTeam"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/img_team_1"
+            app:layout_constraintStart_toStartOf="@+id/img_team_1"
+            app:layout_constraintTop_toBottomOf="@+id/img_team_1" />
+
+        <TextView
+            android:id="@+id/tv_team2"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_team_2"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/AwayTeam"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/img_team_2"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/img_team_2"
+            app:layout_constraintTop_toBottomOf="@+id/img_team_2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
